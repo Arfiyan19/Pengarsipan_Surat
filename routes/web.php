@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
 Route::get('admin/', function () {
@@ -19,29 +20,17 @@ Route::get('admin/', function () {
 })->name('admin');
 
 Route::prefix('admin')
-->middleware('auth')
-->group(function(){
-    Route::resources([
-        'mobil'         => App\Http\Controllers\Admin\MobilController::class,
-        'pelanggan'     => App\Http\Controllers\Admin\PelangganController::class,
-        'paket'         => App\Http\Controllers\Admin\PaketController::class,
-        'transaksi'     => App\Http\Controllers\Admin\TransaksiController::class,
-    ]);
-    Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
-    Route::get('detail-transaksi', [App\Http\Controllers\Admin\DetailController::class, 'index'])->name('transaksi.detail');
-    Route::get('transaksi-bayar/{id}', [App\Http\Controllers\Admin\DetailController::class, 'bayar'])->name('transaksi.bayar');
-    Route::get('transaksi-print/{id}', [App\Http\Controllers\Admin\DetailController::class, 'print'])->name('transaksi.print');
-    Route::get('transaksi-pengembalian', [App\Http\Controllers\Admin\DetailController::class, 'pengembalian'])->name('transaksi.pengembalian');
-    Route::get('transaksi-kembali/{id}', [App\Http\Controllers\Admin\DetailController::class, 'kembali'])->name('transaksi.kembali');
-    Route::get('print-mobil', [App\Http\Controllers\Admin\DetailController::class, 'printMobil'])->name('print.mobil');
-    Route::get('print-pelanggan', [App\Http\Controllers\Admin\DetailController::class, 'printPelanggan'])->name('print.pelanggan');
-    Route::get('print-transaksi', [App\Http\Controllers\Admin\DetailController::class, 'printTransaksi'])->name('print.transaksi');
-});
+    ->middleware('auth')
+    ->group(function () {
+        Route::resources([
+            'surat'     => App\Http\Controllers\SuratController::class,
+            'profile'     => App\Http\Controllers\profileController::class,
+        ]);
+        Route::get('/lihat/{id}', [App\Http\Controllers\SuratController::class, 'lihat']);
+        Route::get('/unduh/{id}', [App\Http\Controllers\SuratController::class, 'unduh']);
+        Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+    });
 
 Route::get('/', [App\Http\Controllers\Pelanggan\IndexController::class, 'index']);
-
-Route::get('/detail/{id}', [App\Http\Controllers\Pelanggan\IndexController::class, 'detail'])->name('detail');
-Route::get('/paket', [App\Http\Controllers\Pelanggan\IndexController::class, 'paket'])->name('paket');
-
 Route::get('/login', function () {
 })->name('login');

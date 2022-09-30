@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateTableMobil extends Migration
+class AddWaktuArsipToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class UpdateTableMobil extends Migration
      */
     public function up()
     {
-        Schema::table('tb_mobil', function (Blueprint $table) {
-            $table->string('foto'); 
-         });
+        Schema::table('surats', function (Blueprint $table) {
+            $table->string('waktu_arsip', 200);
+        });
     }
 
     /**
@@ -25,6 +25,8 @@ class UpdateTableMobil extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('surats', function (Blueprint $table) {
+            //
+        });
     }
 }

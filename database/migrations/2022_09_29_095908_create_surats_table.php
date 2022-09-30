@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableMobil extends Migration
+class CreateSuratsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTableMobil extends Migration
      */
     public function up()
     {
-        Schema::create('tb_mobil', function (Blueprint $table) {
+        Schema::create('surats', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('nopol');
-            $table->string('warna');
-            $table->enum('status',['Tersedia', 'Sedang Disewa']);
+            $table->string('NomorSurat', 100);
+            $table->string('Judul', 200);
+            $table->string('File', 200);
+            $table->string('Kategori', 200);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateTableMobil extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_mobil');
+        Schema::dropIfExists('surats');
     }
 }
